@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>NewsPaper</title>
+</head>
+<body>
+    {% if user.is_authenticated %}
+        <p>Вы вошли как {{ user.username }} | <a href="{% url 'account_logout' %}">Выйти</a></p>
+    {% else %}
+        <p><a href="{% url 'account_login' %}">Войти</a> | <a href="{% url 'account_signup' %}">Регистрация</a></p>
+    {% endif %}
+
+    <hr>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

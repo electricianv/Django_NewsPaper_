@@ -1,0 +1,17 @@
+
+{% extends 'default.html' %}
+<head>
+<body>
+    <h1>Latest News</h1>
+    <ul>
+        {% for article in articles %}
+            <li>
+                <h2>{{ article.title }}</h2>
+                <p>{{ article.date_pub | date:'F j, Y' }}</p>
+                <p>{{ article.body[:20] }}...</p>
+                <a href="{{ article.get_absolute_url }}">Read More</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

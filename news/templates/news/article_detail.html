@@ -1,0 +1,14 @@
+{% extends 'default.html' %}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ article.title }}</title>
+</head>
+<body>
+    <h1>{{ article.title }}</h1>
+    <p>{{ article.text }}</p>
+    <p>Published on: {{ article.published_date|date:"d. m. Y" }}</p>
+
+</body>
+
+</html>

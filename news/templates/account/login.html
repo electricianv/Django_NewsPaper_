@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Вход</h2>
+  <form method="post" action="{% url 'account_login' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Войти</button>
+  </form>
+
+  <p>Нет аккаунта? <a href="{% url 'account_signup' %}">Регистрация</a></p>
+
+  <hr>
+  <p>Или войти через:</p>
+
+  <a href="{% provider_login_url 'google' %}" style="display: inline-block;
+     padding: 10px 20px;
+     background-color: #4285F4;
+     color: white;
+     font-weight: bold;
+     text-decoration: none;
+     border-radius: 5px;
+     font-family: sans-serif;">
+     🔐 Войти через Google
+  </a>
+
+{% endblock %}
