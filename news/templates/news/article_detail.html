@@ -1,14 +1,11 @@
-{% extends 'default.html' %}
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>{{ article.title }}</title>
-</head>
-<body>
+<!-- news/templates/news/article_detail.html -->
+{% extends "base.html" %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block content %}
     <h1>{{ article.title }}</h1>
     <p>{{ article.text }}</p>
-    <p>Published on: {{ article.published_date|date:"d. m. Y" }}</p>
-
-</body>
-
-</html>
+    <p>Дата публикации: {{ article.date_pub|date:"d.m.Y H:i" }}</p>
+    <a href="{% url 'news_list' %}">← Назад ко всем новостям</a>
+{% endblock %}

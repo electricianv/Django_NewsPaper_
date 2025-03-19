@@ -1,10 +1,8 @@
-
-# urls.py in your Django app
+# news/urls.py
 from django.urls import path
-from .import views
-from .views import article_detail
+from . import views
 
 urlpatterns = [
-    path('news/', views.news_list, name='news_list'),  # сопостовляем
-    path('news/<slug:slug>/', article_detail, name='article_detail'),
-    ]
+    path('', views.news_list, name='news_list'),  # ← просто пустая строка!
+    path('<int:id>/', views.article_detail, name='article_detail'),
+]

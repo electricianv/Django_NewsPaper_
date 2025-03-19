@@ -11,3 +11,5 @@ def article_detail(request, id):
     article = get_object_or_404(Article, pk=id)
     context = {'article': article}
     return render(request, 'news/article_detail.html', context)
+def home(request):
+    return render(request, 'home.html')

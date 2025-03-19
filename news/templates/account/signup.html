@@ -1,12 +1,35 @@
-{% extends "base.html" %}
+
+
+{% extends 'base.html' %}
+{% load socialaccount %}
+
+{% block title %}Регистрация{% endblock %}
 
 {% block content %}
-  <h2>Регистрация</h2>
-  <form method="post" action="{% url 'account_signup' %}">
+<h2>Регистрация</h2>
+<form method="post" action="{% url 'account_signup' %}">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Зарегистрироваться</button>
-  </form>
+</form>
 
-  <p>Уже есть аккаунт? <a href="{% url 'account_login' %}">Войти</a></p>
+<p>Уже есть аккаунт? <a href="{% url 'account_login' %}">Войти</a></p>
+
+<hr>
+<h3>Или зарегистрироваться через:</h3>
+
+{% if request %}
+    <a href="{% provider_login_url 'google' %}" style="display: inline-block;
+        padding: 10px 20px;
+        background-color: #4285F4;
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        border-radius: 5px;
+        font-family: sans-serif;">
+        Войти через Google
+    </a>
+{% else %}
+    <p><strong>Google login not available – request object not passed correctly.</strong></p>
+{% endif %}
 {% endblock %}
