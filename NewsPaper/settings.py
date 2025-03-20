@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_celery_beat',
 
     # Для allauth
     'django.contrib.sites',
@@ -29,8 +30,9 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 
     # Твои приложения
-    'news',
+    'news.apps.NewsConfig',
 ]
+
 
 SITE_ID = 1
 
@@ -129,3 +131,19 @@ STATIC_URL = 'static/'
 # Primary key по умолчанию
 # ===========================
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# ===========================
+# Celery и Redis
+# ===========================
+
+REDIS_HOST = 'redis-19370.c276.us-east-1-2.ec2.cloud.redislabs.com'
+REDIS_PORT = 19370
+REDIS_PASSWORD = 'NL0FKPbhWxxX8OSIF0qpvp6Vcq36aOYm'
+
+CELERY_BROKER_URL = f'redis://:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}/0'
+CELERY_RESULT_BACKEND = CELERY_BROKER_URL
+
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'UTC'
