@@ -1,11 +1,23 @@
-<!-- news/templates/news/article_detail.html -->
 {% extends "base.html" %}
 
-{% block title %}{{ article.title }}{% endblock %}
+{% block title %}{{ post.title }}{% endblock %}
 
 {% block content %}
-    <h1>{{ article.title }}</h1>
-    <p>{{ article.text }}</p>
-    <p>Дата публикации: {{ article.date_pub|date:"d.m.Y H:i" }}</p>
+    <h1>{{ post.title }}</h1>
+    <p>{{ post.text }}</p>
+    <p>Дата публикации: {{ post.date_created|date:"d.m.Y H:i" }}</p>
     <a href="{% url 'news_list' %}">← Назад ко всем новостям</a>
+
+    <h2>Комментарии:</h2>
+    {% for comment in post.comments.all %}
+      <div class="comment">
+        <p>
+          <strong>{{ comment.user.username }}</strong>
+          ({{ comment.date_created|date:"d.m.Y H:i" }}) - Рейтинг: {{ comment.rating }}
+        </p>
+        <p>{{ comment.text }}</p>
+      </div>
+    {% empty %}
+      <p>Нет комментариев</p>
+    {% endfor %}
 {% endblock %}

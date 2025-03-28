@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}  {# Если используете crispy-forms, иначе можно просто form.as_p #}
+
+{% block title %}Поиск новостей{% endblock %}
+
+{% block content %}
+  <h1>Поиск новостей</h1>
+  <form method="get">
+    {{ filter.form.as_p }}
+    <button type="submit">Искать</button>
+  </form>
+  
+  <h2>Результаты поиска ({{ filter.qs|length }})</h2>
+  <ul>
+    {% for post in filter.qs %}
+      <li>
+        <a href="{{ post.get_absolute_url }}">{{ post.title }}</a> — 
+        {{ post.date_created|date:"d.m.Y" }}
+      </li>
+    {% empty %}
+      <li>Новостей не найдено.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

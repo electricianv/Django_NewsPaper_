@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Редактировать статью{% endblock %}
+
+{% block content %}
+  <h1>Редактировать статью</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Сохранить</button>
+  </form>
+  <p><a href="{% url 'news_list' %}">← Вернуться</a></p>
+{% endblock %}

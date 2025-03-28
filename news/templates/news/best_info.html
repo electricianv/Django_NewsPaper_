@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Лучшие автор и статья{% endblock %}
+
+{% block content %}
+  <h2>Лучший автор</h2>
+  {% if best_author %}
+    <p>Пользователь: {{ best_author.user.username }}, рейтинг: {{ best_author.rating }}</p>
+  {% else %}
+    <p>Лучший автор не найден.</p>
+  {% endif %}
+
+  <hr>
+
+  <h2>Лучшая статья</h2>
+  {% if best_article %}
+    <p><strong>Дата создания:</strong> {{ best_article.date_created|date:"d.m.Y H:i" }}</p>
+    <p><strong>Автор:</strong> {{ best_article.author.user.username }}</p>
+    <p><strong>Рейтинг:</strong> {{ best_article.rating }}</p>
+    <p><strong>Заголовок:</strong> {{ best_article.title }}</p>
+    <p><strong>Превью:</strong> {{ best_article.preview }}</p>
+  {% else %}
+    <p>Лучшая статья не найдена.</p>
+  {% endif %}
+
+  <hr>
+
+  <h2>Комментарии к статье</h2>
+  {% if article_comments %}
+    {% for comment in article_comments %}
+      <div style="border-bottom: 1px solid #ccc; margin-bottom: 10px; padding-bottom: 10px;">
+        <p><strong>Дата:</strong> {{ comment.date_created|date:"d.m.Y H:i" }}</p>
+        <p><strong>Пользователь:</strong> {{ comment.user.username }}</p>
+        <p><strong>Рейтинг:</strong> {{ comment.rating }}</p>
+        <p><strong>Комментарий:</strong> {{ comment.text }}</p>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>Комментариев к статье нет.</p>
+  {% endif %}
+{% endblock %}

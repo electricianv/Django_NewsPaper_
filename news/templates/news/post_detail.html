@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+  <h1>{{ post.title }}</h1>
+  <p><strong>Дата публикации:</strong> {{ post.date_created|date:"d.m.Y" }}</p>
+  <p>{{ post.text }}</p>
+  <a href="{% url 'news_list' %}">← Назад к списку новостей</a>
+{% endblock %}

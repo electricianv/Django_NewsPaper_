@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Категория: {{ category.name }}
+{% endblock %}
+
+{% block content %}
+  <h1>Категория: {{ category.name }}</h1>
+
+  {% if user.is_authenticated %}
+    {% if user in category.subscribers.all %}
+      <p>Вы уже подписаны на эту категорию.</p>
+    {% else %}
+      <form action="{% url 'subscribe_category' category.pk %}" method="post" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit">Подписаться</button>
+      </form>
+    {% endif %}
+  {% else %}
+    <p>
+      <a href="{% url 'account_login' %}">Войдите</a>, чтобы подписаться.
+    </p>
+  {% endif %}
+
+  <h2>Новости в категории:</h2>
+  <ul>
+    {% for post in posts %}
+      <li>
+        <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+        — {{ post.date_created|date:"d.m.Y H:i" }}
+      </li>
+    {% empty %}
+      <li>Новостей в этой категории нет.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

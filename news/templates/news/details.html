@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
-{% block title %}{{ new.title }}{% endblock %}
+{% block title %}{{ post.title }}{% endblock %}
 
 {% block content %}
-  <h1>{{ new.title }}</h1>
-  <p>{{ new.text }}</p>
-  <p>Дата публикации: {{ new.date_pub|date:"d.m.Y H:i" }}</p>
-  <a href="{% url 'news_list' %}">← Назад ко всем новостям</a>
+    <h1>{{ post.title }}</h1>
+    <p>{{ post.text }}</p>
+    <p>Дата публикации: {{ post.date_created|date:"d.m.Y H:i" }}</p>
+    <a href="{% url 'news_list' %}">← Назад ко всем новостям</a>
 {% endblock %}

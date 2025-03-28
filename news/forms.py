@@ -1,7 +1,8 @@
+# forms.py
 from django import forms
-from .models import Article
+from .models import Post
 
-class ArticleForm(forms.ModelForm):
+class PostForm(forms.ModelForm):
     class Meta:
-        model = Article
-        fields = ['title', 'text']
+        model = Post
+        fields = ['title', 'text', 'post_type']  # укажите нужные поля
